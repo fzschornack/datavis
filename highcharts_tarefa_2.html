@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <title> Highcharts - Tarefa 2 </title>
+        
+        <!-- Materialize CSS -->
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+        <!-- 1. Add these JavaScript inclusions in the head of your page -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/modules/data.js"></script>
+        
+        <!-- 2. Add the JavaScript to initialize the chart on document ready -->
+        <script type="text/javascript">
+            $(function () {         
+                $('#container1').highcharts({
+                    chart: {     
+                        type: 'column' 
+                    }, title: {     
+                        text: 'Relação entre Gênero e número de Oscars' 
+                    }, xAxis: {     
+                        type: 'category'
+                    }, yAxis: {     
+                        title: {    
+                            text: 'Número de Oscars'     
+                        }
+                    }, legend: {
+                        enabled: false
+                    }, plotOptions: {
+                        series: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    }, series: [
+                        {
+                            name: 'Gênero',
+                            data: [ 
+                                ['Drama', 15],
+                                ['Biografia', 7],
+                                ['Policial', 3],
+                                ['Comédia', 2],
+                                ['Suspense', 2],
+                                ['Aventura', 1],
+                                ['Romance', 1]
+                            ]
+                        }
+                    ]
+                });    
+
+                $('#container2').highcharts({
+                    chart: {     
+                        type: 'line' 
+                    }, title: {     
+                        text: 'Principais Estúdios - Lucro total ao longo dos anos' 
+                    }, xAxis: {     
+                        categories: ['2007', '2008', '2009', '2010', '2011']
+                    }, yAxis: {     
+                        title: {    
+                            text: 'Lucro total (em milhões de US$)'     
+                        }
+                    }, plotOptions: {
+                        series: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    }, series: [
+                        {
+                            name: 'Disney',
+                            data: [2074, 1316, 1407, 2052, 1779]
+                        }, {
+                            name: 'Fox',
+                            data: [1588, 1405, 1686, 1444, 61]
+                        }, {
+                            name: 'Warner Bros.',
+                            data: [2607, 2554.8, 2618.1, 2619.6, 92]
+                        }, {
+                            name: 'Universal',
+                            data: [869.8, 1465, 1204.4, 704.6, 561]
+                        }, {
+                            name: 'Sony',
+                            data: [1077.4, 1284.6, 1786.3, 1338.9, 432]
+                        }, {
+                            name: 'Paramount',
+                            data: [2134.9, 2304.3, 1599.3, 2596.6, 1138.5]
+                        }, {
+                            name: 'Estúdios Independentes',
+                            data: [642.9, 1120.8, 1289.8, 1992.4, 1307.5]
+                        }
+                    ]
+                });  
+            });
+        </script>		
+    </head>
+    <body>
+        <br/>
+        <div class="container">
+            <h3>Gráfico 1</h3>
+            <div id="container1" style="width: 800px; height: 400px; margin: 0 auto"></div>
+            <p align="center">
+                O gráfico acima busca mostrar quais gêneros de filmes são mais propensos a ganharem Oscars. <br/>
+                Resultado: quer um Oscar? Produza um Drama. 
+            </p>
+            <br/>
+            <br/>
+            <h3>Gráfico 2</h3>
+            <div id="container2" style="width: 800px; height: 400px; margin: 0 auto"></div>
+            <p align="center">
+                O gráfico acima busca mostrar o desempenho financeiro dos principais estúdios no decorrer dos anos. <br/>
+                Esse gráfico é útil, por exemplo, para alguém que deseja comprar ações de algumas dessas companhias.
+            </p>
+            <br/>
+            <br/>
+            <h3>Dificuldades e Limitações do HighCharts </h3>
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <h4>Dificuldades</h4>
+                    <p>
+                        Uma dificuldade foi em como plotar "corretamente" os atributos do eixo X no 1º gráfico.
+                        Eu não sabia se deveria colocar os gêneros como "Categorias" do eixo X, ou como elementos no atributo "Series".
+                        Para resolver o problema, pesquisei exemplos de gráficos feitos utilizando o HighCharts na internet, encontrei um parecido 
+                        com o que eu queria fazer e o utilizei como modelo.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <h4>Limitações</h4>
+                    <p>
+                        No 2º gráfico eu gostaria de adicionar um espaçamento maior no eixo Y entre os intervalos, pois achei difícil visualizar os valores plotados no gráfico - eles estão muito juntos. Não sei se isso é possível.
+                    </p>
+                </div>
+            </div>
+        </div>  
+        <br/>
+        <br/>
+    </body>
+</html>
