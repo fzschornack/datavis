@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Movies - D3.js + Crossfilter + DC.js</title>
+    <link rel="stylesheet" href="css/dc.css">
+    <script src="js/crossfilter.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="js/dc.js" charset="utf-8"></script>
+
+</head>
+<body>
+    
+    <div id="chart1"><h3> Bilheterias por ano</h3></div>
+    <br>
+    
+    <div id="chart2"><h3> Bilheterias por gênero</h3></div>
+	<script type="text/javascript">
+        var chart1 = dc.barChart('#chart1');
+        var chart2 = dc.barChart('#chart2');
+
+		d3.json("movies.json", function(data){
+			// formatando nossos dados
+            // var dtgFormat = d3.time.format("%Y/%m/%d");
+            // data.forEach(function(d){
+            //     d.date = dtgFormat.parse(d.date);
+            //     d.apple = +d.apple;
+            //     d.facebook = +d.facebook;
+            // });
+
+            //criando um crossfilter
+            var facts = crossfilter(data);
+
+            var yearDim = facts.dimension(function(d){
+                return d.Year;
+            });
+
+            var genreDim = facts.dimension(function(d){
+                return d.Genre;
+            });
+
+            var grossByYearGroup = yearDim.group().reduceSum(function(d){
+                return d.Worldwide_Gross_M;
+            });
+
+            var grossByGenreGroup = genreDim.group().reduceSum(function(d){
+                return d.Worldwide_Gross_M;
+            });
+
+            var genres = [];
+            grossByGenreGroup.all().forEach(function(item,index){
+                genres.push(item.key);
+            });
+
+            chart1.width(800)
+                     .height(400)
+                     .margins({top: 30, right: 50, bottom: 25, left: 40})
+                     .dimension(yearDim)
+                     .x(d3.scale.ordinal().domain([2007,2008,2009,2010,2011]))
+                     .xUnits(dc.units.ordinal)
+                     .renderHorizontalGridLines(true)
+                     .legend(dc.legend().x(650).y(10).itemHeight(13).gap(5))
+                     .brushOn(false)
+                     .group(grossByYearGroup, 'Gross (M)');
+
+            chart2.width(800)
+                     .height(400)
+                     .margins({top: 30, right: 50, bottom: 25, left: 40})
+                     .dimension(genreDim)
+                     .x(d3.scale.ordinal().domain(genres))
+                     .xUnits(dc.units.ordinal)
+                     .renderHorizontalGridLines(true)
+                     .legend(dc.legend().x(650).y(10).itemHeight(13).gap(5))
+                     .brushOn(false)
+                     .group(grossByGenreGroup, 'Gross (M)');
+
+            dc.renderAll();
+
+		});
+	</script>			
+</body>
+</html>
