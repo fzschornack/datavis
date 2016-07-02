@@ -5575,7 +5575,7 @@ dc.barChart = function (parent, chartGroup) {
      * Set or get whether rounding is enabled when bars are centered. If false, using
      * rounding with centered bars will result in a warning and rounding will be ignored.  This flag
      * has no effect if bars are not {@link dc.barChart#centerBar centered}.
-     * When using standard d3.js rounding methods, the brush often doesn't align correctly with
+     * When using standard d3.v4.js rounding methods, the brush often doesn't align correctly with
      * centered bars since the bars are offset.  The rounding function must add an offset to
      * compensate, such as in the following example.
      * @method alwaysUseRounding
@@ -10453,7 +10453,7 @@ dc.crossfilter = crossfilter;
 
 return dc;}
     if(typeof define === "function" && define.amd) {
-        define(["d3", "crossfilter"], _dc);
+        define(["d3.v4", "crossfilter"], _dc);
     } else if(typeof module === "object" && module.exports) {
         var _d3 = require('d3');
         var _crossfilter = require('crossfilter2');
